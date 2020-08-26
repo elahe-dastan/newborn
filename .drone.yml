@@ -8,6 +8,6 @@ steps:
     commands:
       - golangci-lint run --enable-all
   - name: test
-      image: golang
-      commands:
-        - go test -v ./...
+    image: golang
+    commands:
+      - go test -v ./...
