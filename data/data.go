@@ -12,7 +12,7 @@ import (
 )
 
 // Reads CSV data from the path given and returns the headers and data
-func ReadCSVData(path string) ([]string, []string) {
+func ReadCSVData(path string) ([]string, map[string][]string) {
 	f, err := os.Open(path)
 	if err != nil {
 		panic(err)
@@ -27,15 +27,29 @@ func ReadCSVData(path string) ([]string, []string) {
 
 	dataAsText := string(dataAsBytes)
 
-	linesOfData := strings.Split(dataAsText, "\n")
+	lines := strings.Split(dataAsText, "\n")
 
-	headers := strings.Split(linesOfData[0], ",")
+	headers := strings.Split(lines[0], ",")
+	linesOfData := lines[1:]
 
-	return headers, linesOfData[1:]
+	content := make(map[string][]string)
+
+	for _, h := range headers {
+		content[h] = make([]string, len(linesOfData))
+	}
+
+	for i, l := range linesOfData {
+		d := strings.Split(l, ",")
+		for j, h := range headers {
+			content[h][i] = d[j]
+		}
+	}
+
+	return headers, content
 }
 
 // Gets x and y array, plot it and saves it to a png a file with the name given
-func ScatterPlot(x []float64, y []float64, name string) {
+func ScatterPlot(x []float64, y []float64, XaxisName string, YaxisName string, name string) {
 	if len(x) != len(y) {
 		panic("len of x array and y array should be the same")
 	}
@@ -52,8 +66,8 @@ func ScatterPlot(x []float64, y []float64, name string) {
 	}
 
 	p.Title.Text = "ML dataset"
-	p.X.Label.Text = "X"
-	p.Y.Label.Text = "Y"
+	p.X.Label.Text = XaxisName
+	p.Y.Label.Text = YaxisName
 
 	s, err := plotter.NewScatter(pts)
 	if err != nil {
