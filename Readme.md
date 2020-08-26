@@ -43,4 +43,4 @@ nonlinear regression, regression is used in both predicting a value and classifi
 Let's talk a little deeper about regression, we want to fit a line or curve to a set of data.I'm going to show the math
 calculations of what is happening.
 
-[Take a look at here if you are interested in the math explanation](index.html)
+[https://elahe-dastan.github.io/newborn/](index.html)
