@@ -36,3 +36,11 @@ func main() {
 [x y]
 ```
 ![](images/example.png)
+
+# Regression
+One of the basic things everybody has to learn to study ML is linear regression, logistic regression and
+nonlinear regression, regression is used in both predicting a value and classification.<br/>
+Let's talk a little deeper about regression, we want to fit a line or curve to a set of data.I'm going to show the math
+calculations of what is happening.
+
+[Take a look at here if you are interested in the math explanation](index.html)
