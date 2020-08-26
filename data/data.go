@@ -49,7 +49,7 @@ func ReadCSVData(path string) ([]string, map[string][]string) {
 }
 
 // Gets x and y array, plot it and saves it to a png a file with the name given
-func ScatterPlot(x []float64, y []float64, XaxisName string, YaxisName string, name string) {
+func ScatterPlot(x []float64, y []float64, xAxisName string, yAxisName string, name string) {
 	if len(x) != len(y) {
 		panic("len of x array and y array should be the same")
 	}
@@ -66,8 +66,8 @@ func ScatterPlot(x []float64, y []float64, XaxisName string, YaxisName string, n
 	}
 
 	p.Title.Text = "ML dataset"
-	p.X.Label.Text = XaxisName
-	p.Y.Label.Text = YaxisName
+	p.X.Label.Text = xAxisName
+	p.Y.Label.Text = yAxisName
 
 	s, err := plotter.NewScatter(pts)
 	if err != nil {
@@ -77,7 +77,9 @@ func ScatterPlot(x []float64, y []float64, XaxisName string, YaxisName string, n
 	p.Add(s)
 	p.Legend.Add("scatter", s)
 
-	if err := p.Save(4*vg.Inch, 4*vg.Inch, name+".png"); err != nil {
+	size := vg.Length(4)
+
+	if err := p.Save(size*vg.Inch, size*vg.Inch, name+".png"); err != nil {
 		panic(err)
 	}
 }
