@@ -1,3 +1,4 @@
+[![Build Status](https://cloud.drone.io/api/badges/elahe-dastan/newborn/status.svg)](https://cloud.drone.io/elahe-dastan/newborn)
 # Introduction
 This repository is really simple and small I tried to put only basic and most frequently ML algorithms in it, I'm going
 to explain all the algorithms implemented in this repository, how you can use them and even the math calculation behind
