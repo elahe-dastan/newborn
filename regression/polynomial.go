@@ -22,7 +22,7 @@ func (p *Polynomial) Train(features [][]float64, values []float64, degree int, l
 	}
 
 	// length of features[0] shows the number of variables
-	//p.setRandomVariables(degree, len(features[0]))
+	p.setRandomVariables(degree, len(features[0]))
 
 	for i := 0; i < steps; i++ {
 		p.gradientDescent(features, values, learningRate, lambda)

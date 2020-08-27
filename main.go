@@ -34,23 +34,34 @@ func main() {
 	//	values[i],_ = strconv.ParseFloat(content[headers[len(headers) - 1]][i], 64)
 	//}
 
-	//p := regression.New()
-	p := &regression.Polynomial{
-		Bias: 2,
-		Coefficients: [][]float64{
-			{3, 2, 1},
-			{7, 1, 8},
-			{4, 6, 2}},
+	//p := &regression.Polynomial{
+	//	Bias: 2,
+	//	Coefficients: [][]float64{
+	//		{3, 2, 1},
+	//		{7, 1, 8},
+	//		{4, 6, 2}},
+	//}
+
+	p := regression.New()
+	features := [][]float64{
+		{1, 4},
+		{2, 6},
+		{3, 8},
+		{4, 2},
+		{5, 9},
+		{6, 1},
+		{7, 4},
+		{8, 4},
+		{9, 3},
+		{10, 6},
+		{11, 7},
+		{12, 0},
 	}
 
-	features := [][]float64{
-		{4, 8, 1},
-		{5, 4, 7},
-		{8, 1, 4}}
+	// 3x1 + 2x2^2
+	values := []float64{35, 78, 137, 20, 177, 20, 53, 56, 45, 102, 131, 36}
 
-	values := []float64{2, 6, 3}
-
-	p.Train(features, values, 3, 0.5, 1000, 2)
+	p.Train(features, values, 2, 0.00028, 4000, 0)
 	fmt.Println(p.Bias)
 	fmt.Println(p.Coefficients)
 }
