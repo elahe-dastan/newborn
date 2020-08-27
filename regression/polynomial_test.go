@@ -7,8 +7,6 @@ import (
 )
 
 // gradient descent
-// derivative of cost function
-// value of curve
 
 func TestPolynomial_valueOfCurve(t *testing.T) {
 	p := &Polynomial{
@@ -58,4 +56,32 @@ func TestPolynomial_derivativeOfCostFunction(t *testing.T) {
 
 	assert.Equal(t, 2836.6666666666665, d_bias)
 	assert.Equal(t, 652086.6666666666, d_coefficients[2][1])
+
+	// Here the lambda used for regularization is not 0 any more
+	// 1/3 * [Sigma part + lambda * appropriate coefficient]
+	d_bias, d_coefficients = p.derivativeOfCostFunction(features, values, 2)
+	assert.Equal(t, 2836.6666666666665, d_bias)
+	assert.Equal(t, 652090.6666666666, d_coefficients[2][1])
+}
+
+func TestPolynomial_gradientDescent(t *testing.T) {
+	p := &Polynomial{
+		Bias: 2,
+		Coefficients: [][]float64{
+			{3, 2, 1},
+			{7, 1, 8},
+			{4, 6, 2}},
+	}
+
+	features := [][]float64{
+		{4, 8, 1},
+		{5, 4, 7},
+		{8, 1, 4}}
+
+	values := []float64{2, 6, 3}
+
+	p.gradientDescent(features, values, 0.5, 2)
+
+	assert.Equal(t, -1416.3333333333333, p.Bias)
+	assert.Equal(t, -326039.3333333333333, p.Coefficients[2][1])
 }
