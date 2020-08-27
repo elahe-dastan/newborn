@@ -25,7 +25,7 @@ func (p *Polynomial) Train(features [][]float64, values []float64, degree int, l
 	p.setRandomVariables(degree, len(features[0]))
 
 	for i := 0; i < steps; i++ {
-		p.gradientDescent(features, values, degree, learningRate, steps, lambda)
+		p.gradientDescent(features, values, learningRate, lambda)
 	}
 
 }
@@ -42,14 +42,14 @@ func (p *Polynomial) derivativeOfCostFunction(features [][]float64, values []flo
 
 	derivatives := make([][]float64, len(p.Coefficients))
 
-	for k, l := range derivatives {
-		d := make([]float64, len(l))
+	for k, _ := range derivatives {
+		d := make([]float64, len(p.Coefficients[0]))
 		for j := range d {
 			sigma := float64(0)
 			for i := 0; i < m; i++ {
 				sigma += (p.valueOfCurve(features[i]) - values[i]) * math.Pow(features[i][j], float64(k+1))
 			}
-			d[j] = float64(1) / float64(m) * sigma
+			d[j] = float64(1) / float64(m) * (sigma + lambda * p.Coefficients[k][j])
 		}
 		derivatives[k] = d
 	}
@@ -88,7 +88,7 @@ func (p *Polynomial) setRandomVariables(degree int, numOfVariables int) {
 	p.Coefficients = coefficients
 }
 
-func (p *Polynomial) gradientDescent(features [][]float64, values []float64, degree int, learningRate float64, steps int, lambda float64) {
+func (p *Polynomial) gradientDescent(features [][]float64, values []float64, learningRate float64, lambda float64) {
 	d_bias, d_coefficients := p.derivativeOfCostFunction(features, values, lambda)
 	p.Bias -= learningRate * d_bias
 
