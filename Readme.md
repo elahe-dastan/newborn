@@ -44,3 +44,6 @@ Let's talk a little deeper about regression, we want to fit a line or curve to a
 calculations of what is happening.
 
 [check here if you are interested in the math calculations](https://elahe-dastan.github.io/newborn/)
+
+In this repository I haven't implemented linear regression separately because linear regression is polynomial regression 
+with degree equal to 1 and lambda equal to 0
