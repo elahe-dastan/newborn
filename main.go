@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/elahe-dastan/newborn/data"
 	"github.com/elahe-dastan/newborn/knn"
 	"strconv"
@@ -81,6 +82,8 @@ func main() {
 		labels[i], _ = strconv.Atoi(content[headers[len(headers)-1]][i])
 	}
 
-	knn.KNN(currentData, labels, []float64{57.0,1.0,4.0,140.0,192.0,0.0,0.0,148.0,0.0,0.4,2.0,0.0,6.0}, 3)
+	newData := []float64{57.0,1.0,4.0,140.0,192.0,0.0,0.0,148.0,0.0,0.4,2.0,0.0,6.0}
 
+	label := knn.KNN(currentData, labels, newData, 3)
+	fmt.Println(label)
 }

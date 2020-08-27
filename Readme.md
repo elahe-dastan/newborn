@@ -52,3 +52,38 @@ with degree equal to 1 and lambda equal to 0
 This algorithm is used for classification, to choose a label for a new data the algorithm finds the k nearest data to it
 and finds the most repeated label among them, different methods can be used to calculate the distance between the new data 
 and the old ones in this repository I use one of the easiest approaches called Euclidean Distance.<br/>
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/elahe-dastan/newborn/data"
+	"github.com/elahe-dastan/newborn/knn"
+	"strconv"
+)
+
+func main() {
+	headers, content := data.ReadCSVData("./knn/dataset_test.csv")
+	currentData := make([][]float64, len(content[headers[0]]))
+	for i := range currentData {
+		f := make([]float64, len(headers)-1)
+		for j := range f {
+			f[j], _ = strconv.ParseFloat(content[headers[j]][i], 64)
+		}
+		currentData[i] = f
+	}
+
+	labels := make([]int, len(content[headers[0]]))
+	for i := range labels {
+		labels[i], _ = strconv.Atoi(content[headers[len(headers)-1]][i])
+	}
+
+	newData := []float64{57.0,1.0,4.0,140.0,192.0,0.0,0.0,148.0,0.0,0.4,2.0,0.0,6.0}
+
+	label := knn.KNN(currentData, labels, newData, 3)
+	fmt.Println(label)
+}
+```
+```
+0
+```
