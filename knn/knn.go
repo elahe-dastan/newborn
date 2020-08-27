@@ -2,7 +2,7 @@ package knn
 
 import "math"
 
-func knn(currentData [][]float64, labels []int, newData []float64, k int) int {
+func KNN(currentData [][]float64, labels []int, newData []float64, k int) int {
 	if len(currentData) != len(labels) {
 		panic("length of current data and labels should be the same")
 	}

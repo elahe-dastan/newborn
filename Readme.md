@@ -51,4 +51,4 @@ with degree equal to 1 and lambda equal to 0
 # K Nearest Neighbour
 This algorithm is used for classification, to choose a label for a new data the algorithm finds the k nearest data to it
 and finds the most repeated label among them, different methods can be used to calculate the distance between the new data 
-and the old ones in this repository I use on the easiest called Euclidean Distance
+and the old ones in this repository I use one of the easiest approaches called Euclidean Distance.<br/>
